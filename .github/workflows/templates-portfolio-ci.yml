@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - feat/templates-portfolio
+      - feat/ai-template-design
   pull_request:
 
 jobs:
