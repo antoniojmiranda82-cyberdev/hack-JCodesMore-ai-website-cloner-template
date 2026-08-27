@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { StatusBadge } from "@/components/templates/status-badge";
 import { getTemplateBySlug } from "@/lib/templates";
@@ -21,7 +22,9 @@ export default async function TemplateDetailPage({
 
   return (
     <main className="mx-auto min-h-screen max-w-5xl px-6 py-10">
-      <a href="/" className="text-sm text-muted-foreground hover:text-foreground">← Templates Portfolio</a>
+      <Link href="/" className="text-sm text-muted-foreground hover:text-foreground">
+        ← Templates Portfolio
+      </Link>
 
       <header className="mt-6 flex flex-col gap-4 border-b pb-8 sm:flex-row sm:items-end sm:justify-between">
         <div>
