@@ -1,12 +1,12 @@
 {
   "id": "vigil-inspired",
-  "name": "Vigil Inspired",
+  "name": "AI Template Design",
   "sourceUrl": "https://horizonx.so/explore/vigil",
-  "category": ["cinematic", "3d-webgl", "landing-page"],
-  "stack": ["nextjs", "react", "tailwind"],
+  "category": ["cinematic", "3d-webgl", "saas", "landing-page"],
+  "stack": ["nextjs", "react", "tailwind", "threejs", "lenis"],
   "motionLevel": "high",
-  "status": "captured",
+  "status": "complete",
   "commercialReady": false,
-  "sourceBrandRemoved": false,
-  "qaPassed": false
+  "sourceBrandRemoved": true,
+  "qaPassed": true
 }

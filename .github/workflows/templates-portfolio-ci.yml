@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - feat/templates-portfolio
+      - feat/ai-template-design
   pull_request:
 
 jobs:
@@ -37,3 +38,11 @@ jobs:
 
       - name: Run desktop and mobile smoke tests
         run: npm run test:e2e
+
+      - name: Upload visual QA screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-template-visual-qa
+          path: artifacts/
+          if-no-files-found: ignore
