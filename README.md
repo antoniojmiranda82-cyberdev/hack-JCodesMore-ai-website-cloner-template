@@ -1,108 +1,156 @@
-# AI Website Cloner Template
+# Templates Portfolio
 
-A reusable template for reverse-engineering any website and rebuilding it as a pixel-perfect clone using [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
+A private master library for collecting authorized website-reconstruction studies, extracted design systems, rebuilt implementations, and QA records in one place before selected concepts are converted into original standalone templates.
 
-Point it at a URL, run `/clone-website`, and Claude Code will inspect the site via Chrome MCP, extract design tokens and assets, write component specs, and dispatch parallel builder agents to reconstruct every section — all in isolated git worktrees that merge automatically.
+This repository keeps the existing single-URL reconstruction workflow while adding a portfolio layer, a Dembrandt-first intake command, typed metadata, dashboard filtering, per-template detail views, and desktop/mobile smoke tests.
 
-## Demo
+## Authorized Use
 
-[![Watch the demo](docs/design-references/comparison.png)](https://youtu.be/O669pVZ_qr0)
+Use the reconstruction and extraction tools only on sites you own, licensed templates, or pages you have permission to analyze and recreate. Reference records may document third-party sites for internal analysis where permitted, but third-party trademarks, branding, copy, logos, illustrations, video, 3D assets, and protected or unlicensed media are not commercial template assets.
 
-> Click the image above to watch the full demo on YouTube.
+A template cannot be marked `ready-to-commercialize` until source branding/copy/media have been removed or replaced, naming is original, the implementation is independently reusable, and QA passes.
 
 ## Quick Start
 
-1. **Clone this repo**
-   ```bash
-   git clone https://github.com/JCodesMore/ai-website-cloner-template.git my-clone
-   cd my-clone
-   ```
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-3. **Start Claude Code** with Chrome MCP enabled:
-   ```bash
-   claude --chrome
-   ```
-4. **Run the skill**:
-   ```
-   /clone-website <target-url>
-   ```
-5. **Customize** (optional) — after the base clone is built, modify as needed
-
-> **Tip:** You can optionally edit `TARGET.md` before cloning to specify pages, fidelity level, and scope — but it's not required. The `/clone-website` skill will handle everything from just the URL.
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org/) 20+
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
-
-## Tech Stack
-
-- **Next.js 16** — App Router, React 19, TypeScript strict
-- **shadcn/ui** — Radix primitives + Tailwind CSS v4
-- **Tailwind CSS v4** — oklch design tokens
-- **Lucide React** — default icons (replaced by extracted SVGs during cloning)
-
-## How It Works
-
-The `/clone-website` skill runs a multi-phase pipeline:
-
-1. **Reconnaissance** — screenshots, design token extraction, interaction sweep (scroll, click, hover, responsive)
-2. **Foundation** — updates fonts, colors, globals, downloads all assets
-3. **Component Specs** — writes detailed spec files (`docs/research/components/`) with exact computed CSS values, states, behaviors, and content
-4. **Parallel Build** — dispatches builder agents in git worktrees, one per section/component
-5. **Assembly & QA** — merges worktrees, wires up the page, runs visual diff against the original
-
-Each builder agent receives the full component specification inline — exact `getComputedStyle()` values, interaction models, multi-state content, responsive breakpoints, and asset paths. No guessing.
-
-## Project Structure
-
+```bash
+npm install
+npx -y dembrandt install-browser
+npm run template:intake -- --url https://example.com/page --slug example-page --name "Example Page"
+npm run dev
 ```
-src/
-  app/              # Next.js routes
-  components/       # React components
-    ui/             # shadcn/ui primitives
-    icons.tsx       # Extracted SVG icons
-  lib/utils.ts      # cn() utility
-  types/            # TypeScript interfaces
-  hooks/            # Custom React hooks
-public/
-  images/           # Downloaded images from target
-  videos/           # Downloaded videos from target
-  seo/              # Favicons, OG images
-docs/
-  research/         # Extraction output & component specs
-  design-references/ # Screenshots
-scripts/            # Asset download scripts
-TARGET.md           # Clone target configuration
-AGENTS.md           # Agent instructions & code style
+
+Open the local app to browse the private Templates Portfolio.
+
+## Template Folder Contract
+
+Each template lives under:
+
+```text
+templates/<slug>/
+  reference/
+  design/
+  app/
+  assets/
+  qa/
+  template.json
 ```
+
+- `reference/` stores source metadata, screenshots, and observation notes.
+- `design/` stores Dembrandt extraction output and generated design-system artifacts.
+- `app/` is the reconstructed implementation workspace.
+- `assets/` contains permitted, original, generated, or replacement assets.
+- `qa/` stores build, responsive, interaction, and visual-review notes.
+- `template.json` is the canonical portfolio metadata record.
+
+## Metadata Statuses
+
+Status progression is intentionally limited to:
+
+```text
+captured -> extracted -> rebuilding -> qa -> complete -> ready-to-commercialize
+```
+
+`ready-to-commercialize` also requires `commercialReady`, `sourceBrandRemoved`, and `qaPassed` to be true.
+
+## Intake Command
+
+```bash
+npm run template:intake -- \
+  --url https://example.com/page \
+  --slug example-page \
+  --name "Example Page" \
+  --category cinematic,landing-page \
+  --motion high
+```
+
+Defaults are `landing-page` and `medium` motion. The intake command creates the template folder, writes metadata and source records, then runs Dembrandt. Successful extraction changes status from `captured` to `extracted`.
+
+If extraction fails, the template remains retryable at `captured`, existing artifacts are preserved, and `blockedReason` records the failure. A completed template is not overwritten without `--force`; forced replacement preserves prior metadata under `template-history/`.
+
+## Dembrandt Prerequisite
+
+Dembrandt uses Chromium. Install the matching browser once per environment:
+
+```bash
+npx -y dembrandt install-browser
+```
+
+Dembrandt extracts DOM-derived colors, typography, spacing, borders, shadows, component styling, breakpoints, and motion information. Canvas/WebGL content may need screenshot/reference-driven reconstruction because it may not expose equivalent DOM styles.
+
+## Reconstruction Handoff
+
+After intake:
+
+1. Review `templates/<slug>/design`.
+2. Fill the optional Portfolio Template fields in `TARGET.md`.
+3. Use the existing browser-capable single-URL reconstruction workflow on an authorized target.
+4. Work inside `templates/<slug>/app`.
+5. Change status to `rebuilding` during implementation.
+6. Change status to `qa` when ready for comparison.
+7. Record build, desktop/mobile, interaction, and visual results under `qa/`.
+8. Set `complete` only after those reviews pass.
+
+When the Portfolio Template fields in `TARGET.md` are blank, existing single-URL behavior remains unchanged.
+
+See `docs/template-workflow.md` for the detailed handoff.
+
+## Portfolio UI
+
+The Next.js app discovers `templates/*/template.json` without hard-coded imports and provides:
+
+- template cards
+- category filtering
+- status filtering
+- internal/commercial-readiness filtering
+- template detail pages
+- source-reference links
+- design/app/QA locations
+- commercialization-readiness state
+
+The initial benchmark is `vigil-inspired`, recorded as an internal-only motion-heavy reference. It begins at `captured` and is not commercial-ready.
+
+## QA
+
+Each template QA record should cover:
+
+- production build
+- desktop layout
+- mobile layout
+- interactions
+- visual differences
+- unsupported Canvas/WebGL behavior
+- commercialization blockers
 
 ## Commands
 
 ```bash
-npm run dev    # Start dev server
-npm run build  # Production build
-npm run lint   # ESLint check
+npm run dev              # Start Next.js
+npm run build            # Production build
+npm run lint             # ESLint
+npm test                 # Unit and component tests
+npm run test:watch       # Watch unit/component tests
+npm run test:e2e         # Playwright desktop + mobile smoke tests
+npm run template:intake  # Create/extract a template entry
 ```
 
-## Configuration (Optional)
+## Tech Stack
 
-Edit **`TARGET.md`** before cloning if you want fine-grained control:
+- Next.js 16
+- React 19
+- TypeScript 5
+- Tailwind CSS 4
+- Dembrandt
+- Vitest + Testing Library
+- Playwright
 
-- **Pages** — which pages to replicate (default: home page)
-- **Fidelity** — pixel-perfect, high fidelity, or structural
-- **Scope** — what's in/out of scope
-- **Customization plans** — modifications to apply after the base clone
+## CI
 
-If you skip this, `/clone-website <url>` will default to a pixel-perfect clone of the home page. 
+Templates Portfolio CI runs dependency installation, unit/component tests, ESLint, a production Next.js build, Chromium installation, and Playwright smoke tests. CI does not run Dembrandt against third-party websites; extraction is an explicit operator action.
 
-## Star History
+## Commercial Packaging Later
 
-[![Star History Chart](https://api.star-history.com/svg?repos=JCodesMore/ai-website-cloner-template&type=Date)](https://star-history.com/#JCodesMore/ai-website-cloner-template&Date)
+Phase 1 is a private master library. There is no marketplace, checkout, licensing portal, customer account system, or automated storefront publication. Once a template satisfies the commercialization boundary, it can later be exported into a separate repository/product with original branding, copy, naming, and properly licensed assets.
 
 ## License
 
-MIT
+The repository code retains its applicable license. Third-party reference material remains subject to its own rights and terms.

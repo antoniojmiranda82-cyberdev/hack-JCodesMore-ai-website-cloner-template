@@ -1,0 +1,12 @@
+{
+  "id": "alpha",
+  "name": "Alpha",
+  "sourceUrl": "https://example.com/alpha",
+  "category": ["cinematic"],
+  "stack": ["nextjs", "react"],
+  "motionLevel": "high",
+  "status": "captured",
+  "commercialReady": false,
+  "sourceBrandRemoved": false,
+  "qaPassed": false
+}
