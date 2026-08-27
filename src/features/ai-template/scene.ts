@@ -35,7 +35,7 @@ const structures: SceneStructure[] = [
 ];
 
 const lights: SceneLight[] = [
-  { kind: "moon", position: [-10, 18, 12], intensity: 2.2 },
+  { kind: "moon", position: [-10, 18, 12], intensity: 3.6 },
   { kind: "fire", position: [-3.3, 2.2, 4], intensity: 18 },
   { kind: "fire", position: [3.3, 2.2, 4], intensity: 18 },
   { kind: "fire", position: [-3.6, 2.1, -12], intensity: 15 },
