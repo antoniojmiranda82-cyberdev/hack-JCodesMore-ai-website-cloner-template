@@ -1,0 +1,12 @@
+{
+  "id": "vigil-inspired",
+  "name": "Vigil Inspired",
+  "sourceUrl": "https://horizonx.so/explore/vigil",
+  "category": ["cinematic", "3d-webgl", "landing-page"],
+  "stack": ["nextjs", "react", "tailwind"],
+  "motionLevel": "high",
+  "status": "captured",
+  "commercialReady": false,
+  "sourceBrandRemoved": false,
+  "qaPassed": false
+}
