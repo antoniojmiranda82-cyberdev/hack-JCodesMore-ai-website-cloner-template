@@ -32,7 +32,17 @@ export default async function TemplateDetailPage({
           <h1 className="mt-2 text-4xl font-semibold">{template.name}</h1>
           <p className="mt-3 text-muted-foreground">Motion: {template.motionLevel}</p>
         </div>
-        <StatusBadge status={template.status} />
+        <div className="flex flex-col items-start gap-3 sm:items-end">
+          <StatusBadge status={template.status} />
+          {template.id === "vigil-inspired" ? (
+            <Link
+              href="/showcase/ai-template"
+              className="rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background transition-opacity hover:opacity-80"
+            >
+              Open Live Preview
+            </Link>
+          ) : null}
+        </div>
       </header>
 
       <section className="grid gap-4 py-8 md:grid-cols-2">
