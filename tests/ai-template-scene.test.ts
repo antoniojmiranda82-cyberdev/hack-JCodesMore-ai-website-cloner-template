@@ -8,6 +8,12 @@ describe("AI template scene blueprint", () => {
     expect(scene.lights.length).toBeGreaterThanOrEqual(4);
   });
 
+  it("keeps the moonlight bright enough to reveal architecture", () => {
+    const scene = getSceneBlueprint("desktop");
+    const moon = scene.lights.find((light) => light.kind === "moon");
+    expect(moon?.intensity).toBeGreaterThanOrEqual(3.2);
+  });
+
   it("reduces scene density for mobile", () => {
     const desktop = getSceneBlueprint("desktop");
     const mobile = getSceneBlueprint("mobile");
