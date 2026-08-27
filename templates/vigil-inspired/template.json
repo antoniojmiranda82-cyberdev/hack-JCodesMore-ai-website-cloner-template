@@ -5,8 +5,8 @@
   "category": ["cinematic", "3d-webgl", "saas", "landing-page"],
   "stack": ["nextjs", "react", "tailwind", "threejs", "lenis"],
   "motionLevel": "high",
-  "status": "qa",
+  "status": "complete",
   "commercialReady": false,
   "sourceBrandRemoved": true,
-  "qaPassed": false
+  "qaPassed": true
 }
