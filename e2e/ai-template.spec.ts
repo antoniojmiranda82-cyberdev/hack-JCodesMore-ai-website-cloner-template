@@ -8,7 +8,7 @@ const chapters = [
   "The Watch",
 ];
 
-test("renders the complete cinematic AI template journey", async ({ page }) => {
+test("renders the complete cinematic AI template journey", async ({ page }, testInfo) => {
   await page.goto("/showcase/ai-template");
 
   await expect(page.locator("[data-ai-template]")).toBeVisible();
@@ -19,6 +19,7 @@ test("renders the complete cinematic AI template journey", async ({ page }) => {
   }
 
   await expect(page.getByRole("link", { name: "Enter the platform" })).toBeAttached();
+  await page.screenshot({ path: `artifacts/ai-template-${testInfo.project.name}.png`, fullPage: true });
   await page.locator("#watch").scrollIntoViewIfNeeded();
   await expect(page.getByRole("heading", { name: "The Watch" })).toBeVisible();
 });
