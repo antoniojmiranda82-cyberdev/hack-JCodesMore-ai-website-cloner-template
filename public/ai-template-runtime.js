@@ -26,13 +26,13 @@
       renderer.outputColorSpace = THREE.SRGBColorSpace;
 
       const scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x090b0d, window.innerWidth < 700 ? 0.045 : 0.032);
+      scene.fog = new THREE.FogExp2(0x18222a, window.innerWidth < 700 ? 0.034 : 0.024);
 
       const camera = new THREE.PerspectiveCamera(54, 1, 0.1, 120);
       camera.position.set(0, 2.4, 18);
 
-      const stone = new THREE.MeshStandardMaterial({ color: 0x2b3032, roughness: 0.92, metalness: 0.02 });
-      const darkStone = new THREE.MeshStandardMaterial({ color: 0x171b1d, roughness: 0.96, metalness: 0.01 });
+      const stone = new THREE.MeshStandardMaterial({ color: 0x4c565b, roughness: 0.9, metalness: 0.02 });
+      const darkStone = new THREE.MeshStandardMaterial({ color: 0x30383c, roughness: 0.94, metalness: 0.01 });
       const ember = new THREE.MeshBasicMaterial({ color: 0xcf8a3c });
 
       const group = new THREE.Group();
@@ -75,11 +75,11 @@
         group.add(mesh);
       });
 
-      scene.add(new THREE.HemisphereLight(0x6f8392, 0x120e09, 0.5));
+      scene.add(new THREE.HemisphereLight(0x9fb7c7, 0x241d17, 0.9));
 
       (blueprint.lights || []).forEach((item) => {
         if (item.kind === "moon") {
-          const light = new THREE.DirectionalLight(0xb7c9d6, item.intensity || 2);
+          const light = new THREE.DirectionalLight(0xd2e0e8, item.intensity || 3.2);
           light.position.set(...item.position);
           scene.add(light);
           return;
@@ -102,7 +102,7 @@
       starsGeometry.setAttribute("position", new THREE.Float32BufferAttribute(stars, 3));
       const starsMesh = new THREE.Points(
         starsGeometry,
-        new THREE.PointsMaterial({ color: 0xaab9c0, size: 0.045, transparent: true, opacity: 0.65 })
+        new THREE.PointsMaterial({ color: 0xc0cbd1, size: 0.045, transparent: true, opacity: 0.72 })
       );
       scene.add(starsMesh);
 
