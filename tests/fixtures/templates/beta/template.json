@@ -1,0 +1,12 @@
+{
+  "id": "beta",
+  "name": "Beta",
+  "sourceUrl": "https://example.com/beta",
+  "category": ["saas"],
+  "stack": ["nextjs", "react"],
+  "motionLevel": "medium",
+  "status": "qa",
+  "commercialReady": false,
+  "sourceBrandRemoved": false,
+  "qaPassed": false
+}
