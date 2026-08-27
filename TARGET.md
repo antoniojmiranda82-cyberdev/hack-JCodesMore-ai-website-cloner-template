@@ -1,41 +1,45 @@
 # Target Website
 
 ## URL
-<!-- Replace with the URL of the website you're reverse-engineering -->
+<!-- Use a site you own, are licensed to reproduce, or have permission to analyze. -->
 https://example.com
 
 ## Scope
 
-### Pages to Replicate
-<!-- List every page you want to rebuild. Be specific. -->
+### Pages to Recreate
+<!-- List each authorized page you want to rebuild. -->
 - [ ] Home page
 - [ ] (add more pages here)
 
 ### Fidelity Level
-<!-- Choose one -->
-- [ ] **Pixel-perfect** — exact match in colors, spacing, typography, animations
-- [ ] **High fidelity** — visually similar, same layout and feel, minor deviations OK
-- [ ] **Structural** — same layout and components, custom styling acceptable
+- [ ] **Pixel-perfect** — exact layout and behavior where permitted
+- [ ] **High fidelity** — visually similar structure and motion
+- [ ] **Structural** — same general layout with original styling/content
 
 ### In Scope
-<!-- What you're building -->
-- Visual layout and styling
+- Visual layout and styling analysis
 - Component structure and interactions
 - Responsive design
 - Mock data for demo purposes
 
 ### Out of Scope
-<!-- What you're NOT building -->
 - Real backend / database
 - Authentication
 - Real-time features
-- SEO optimization
-- Accessibility audit (unless specifically needed)
+- Third-party trademarks, protected copy, or unlicensed media
+
+## Portfolio Template
+<!-- Optional. Leave blank for the existing single-URL workflow. -->
+Template slug:
+Template app output directory:
+Dembrandt design directory:
+QA directory:
+
+When these fields are blank, the existing single-URL reconstruction workflow is unchanged. When populated, use the intake-created template folder as the working destination and preserve its design, reference, and QA records.
 
 ## Why
-<!-- Brief explanation of why you're cloning this site -->
-(Fill in your reason — portfolio piece, learning exercise, demo, template for custom features, etc.)
+<!-- Brief explanation of the authorized use: owned site, licensed template, learning exercise, internal design study, etc. -->
+(Fill in your reason)
 
 ## Customization Plans
-<!-- After the base emulation, what changes do you want to make? -->
-- (List planned modifications or say "none — pure emulation")
+- (List planned original modifications or say "none")
